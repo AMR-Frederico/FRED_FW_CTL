@@ -5,14 +5,15 @@
 
 bool connected = false;
 bool emergency_break = false;
+int battery_level = 0; 
 
 
 void setup() {
   // Serial.begin(115200);
   pinMode(LED_BUILDIN,OUTPUT);
   digitalWrite(LED_BUILDIN, LOW);
-  PS4setup();
   ros_init();
+  PS4setup();
 }
 
 void loop() {
@@ -24,6 +25,9 @@ void loop() {
     cmd_linear = ps4Linear();
     cmd_angular = ps4Angular();
 
+    emergency_break = ps4X();
+
+    battery_level = battery();
     
     // if(battery(30)){
     //     //ADD BLINK 
@@ -41,7 +45,7 @@ void loop() {
   }else{
     digitalWrite(LED_BUILDIN, LOW);
   }
-  // ros_loop(cmd_linear,cmd_angular,1);
+  ros_loop(cmd_linear,cmd_angular,emergency_break,battery_level,connected);
 
-  // nh.spinOnce();
+  nh.spinOnce();
 }

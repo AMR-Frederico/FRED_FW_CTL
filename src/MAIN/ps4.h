@@ -9,6 +9,11 @@ void PS4setup() {
  
 }
 
+bool ps4X(){
+
+  return PS4.Triangle();  
+}
+
 int ps4Linear() {
 
   cmd_linear = 0;
@@ -36,9 +41,9 @@ bool ps4Connected(){
     return PS4.isConnected();
 }
 
-bool battery(int battery_low){
-
-  return PS4.Battery() < battery_low ;
+int battery(){
+  int battery = PS4.Battery();
+  return battery ;
 
 }
 
