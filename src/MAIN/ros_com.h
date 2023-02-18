@@ -1,6 +1,6 @@
 #include <ros.h>
 #include <std_msgs/Int16.h>
-
+#include <std_msgs/Bool.h>
 
 
 // Subscribers ------------
@@ -36,7 +36,7 @@ ros::Publisher sub_emergency_break(emergency_break_topic, &emergency_break_msg);
 std_msgs::Int16 battery_level_msg ;
 ros::Publisher sub_battery_level(battery_level_topic, &battery_level_msg);
 
-std_msgs::Int16 controler_connected_msg ;
+std_msgs::Bool controler_connected_msg ;
 ros::Publisher sub_controler_connected(controler_connected_topic, &controler_connected_msg);
 
 
