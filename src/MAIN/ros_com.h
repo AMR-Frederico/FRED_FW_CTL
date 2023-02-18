@@ -19,6 +19,9 @@ ros::NodeHandle  nh;
 #define emergency_break_topic "joy/controler/ps4/break"
 #define battery_level_topic "joy/controler/ps4/battery"
 #define controler_connected_topic "joy/controler/connected"
+#define circle_topic "joy/controler/ps4/circle"
+#define cross_topic "joy/controler/ps4/cross"
+#define triangle_topic "joy/controler/ps4/triangle"
 
 
 //-----------------PUBS-------------------------
@@ -38,6 +41,15 @@ ros::Publisher sub_battery_level(battery_level_topic, &battery_level_msg);
 
 std_msgs::Bool controler_connected_msg ;
 ros::Publisher sub_controler_connected(controler_connected_topic, &controler_connected_msg);
+
+std_msgs::Int16 circle_msg ;
+ros::Publisher sub_circle(circle_topic, &circle_msg);
+
+std_msgs::Int16 triangle_msg ;
+ros::Publisher sub_triangle(triangle_topic, &triangle_msg);
+
+std_msgs::Int16 cross_msg ;
+ros::Publisher sub_cross(cross_topic, &cross_msg);
 
 
 // debug
@@ -66,10 +78,13 @@ void ros_init(){
   nh.advertise(sub_emergency_break);
   nh.advertise(sub_battery_level);
   nh.advertise(sub_controler_connected);
+  nh.advertise(sub_circle);
+  nh.advertise(sub_cross);
+  nh.advertise(sub_triangle);
 
 }
 
-void ros_loop(int cmd_vel_linear, float cmd_vel_angular, int emergency_break, int battery_level, bool connected){
+void ros_loop(int cmd_vel_linear, float cmd_vel_angular, int emergency_break,int triangle,int circle, int battery_level, bool connected){
 
     //vel linear
     cmd_vel_linear_msg.data = cmd_vel_linear;
@@ -82,6 +97,15 @@ void ros_loop(int cmd_vel_linear, float cmd_vel_angular, int emergency_break, in
     //emergency break pressed 
     emergency_break_msg.data = emergency_break;
     sub_emergency_break.publish(&emergency_break_msg);
+
+    circle_msg.data = circle;
+    sub_circle.publish(&circle_msg);
+
+    cross_msg.data = emergency_break;
+    sub_cross.publish(&cross_msg);
+
+    triangle_msg.data = triangle;
+    sub_triangle.publish(&triangle_msg);
 
     //show current controler level 
     battery_level_msg.data = battery_level;

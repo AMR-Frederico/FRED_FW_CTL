@@ -9,9 +9,19 @@ void PS4setup() {
  
 }
 
-bool ps4X(){
+bool ps4Triangle(){
 
   return PS4.Triangle();  
+}
+
+bool ps4X(){
+
+  return PS4.Cross();  
+}
+
+bool ps4Circle(){
+
+  return PS4.Circle();  
 }
 
 int ps4Linear() {

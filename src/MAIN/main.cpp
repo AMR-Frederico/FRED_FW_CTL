@@ -6,7 +6,8 @@
 bool connected = false;
 bool emergency_break = false;
 int battery_level = 0; 
-
+bool circle = false;
+bool triangle = false; 
 
 void setup() {
   // Serial.begin(115200);
@@ -26,6 +27,8 @@ void loop() {
     cmd_angular = ps4Angular();
 
     emergency_break = ps4X();
+    circle = ps4Circle();
+    triangle = ps4Triangle();
 
     battery_level = battery();
     
@@ -45,7 +48,7 @@ void loop() {
   }else{
     digitalWrite(LED_BUILDIN, LOW);
   }
-  ros_loop(cmd_linear,cmd_angular,emergency_break,battery_level,connected);
+  ros_loop(cmd_linear,cmd_angular,emergency_break, triangle,circle,battery_level,connected);
 
   nh.spinOnce();
 }
