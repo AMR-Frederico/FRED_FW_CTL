@@ -24,10 +24,10 @@ void loop() {
   if(connected){
     digitalWrite(LED_BUILDIN, HIGH);
     cmd_linear = ps4Linear();
-    if(abs(cmd_linear) > abs(last_cmd_linear))
+    if(cmd_linear > last_cmd_linear && last_cmd_linear >= 0) || (last_cmd_linear > cmd_linear && last_cmd_linear <= 0))
       cmd_linear = rampa(ps4Linear(), 80, LINEAR);
     cmd_angular = ps4Angular();
-  last_cmd_linear = cmd_linear;
+    last_cmd_linear = cmd_linear;
 
     emergency_break = ps4X();
     circle = ps4Circle();
