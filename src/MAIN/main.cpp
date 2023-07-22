@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <MAIN/ps4.h>
 #include <MAIN/ros_com.h>
+#include "rampa.h"
 // test
 
 bool connected = false;
@@ -22,9 +23,11 @@ void loop() {
 
   if(connected){
     digitalWrite(LED_BUILDIN, HIGH);
-
     cmd_linear = ps4Linear();
+    if(abs(cmd_linear) > abs(last_cmd_linear))
+      cmd_linear = rampa(ps4Linear(), 80, LINEAR);
     cmd_angular = ps4Angular();
+  last_cmd_linear = cmd_linear;
 
     emergency_break = ps4X();
     circle = ps4Circle();

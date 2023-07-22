@@ -1,6 +1,7 @@
 #include <PS4Controller.h>
 #include <MAIN/config.h>
 int cmd_linear ;
+int last_cmd_linear;
 int cmd_angular ;
 
 void PS4setup() {
@@ -28,7 +29,7 @@ int ps4Linear() {
 
   cmd_linear = 0;
 
-  if(PS4.Square()){
+  if(PS4.L2()){
     cmd_linear = PS4.LStickY();
   }
  
@@ -38,8 +39,8 @@ int ps4Linear() {
 int ps4Angular() {
   cmd_angular = 0;
 
-  if(PS4.Square()){
-    cmd_angular = PS4.LStickX();
+  if(PS4.L2()){
+    cmd_angular = PS4.RStickX();
   }
  
    return cmd_angular ;
