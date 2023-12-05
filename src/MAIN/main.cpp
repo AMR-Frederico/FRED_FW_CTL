@@ -18,13 +18,14 @@ void setup() {
   PS4setup();
 }
 
+
 void loop() {
   connected = ps4Connected();
 
   if(connected){
     digitalWrite(LED_BUILDIN, HIGH);
     cmd_linear = ps4Linear();
-    if(cmd_linear > last_cmd_linear && last_cmd_linear >= 0) || (last_cmd_linear > cmd_linear && last_cmd_linear <= 0))
+    if((cmd_linear > last_cmd_linear && last_cmd_linear >= 0) || (last_cmd_linear > cmd_linear && last_cmd_linear <= 0))
       cmd_linear = rampa(ps4Linear(), 80, LINEAR);
     cmd_angular = ps4Angular();
     last_cmd_linear = cmd_linear;
